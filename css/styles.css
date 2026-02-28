@@ -478,11 +478,17 @@ img {
   padding-left: 16px;
   color: #ffffff;
   border-radius: 4px;
+  outline: none;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-subscribe-input::placeholder {
   color: #ffffff;
+}
+
+.footer-subscribe-input:focus {
+  border-color: #31d0aa;
 }
 
 .footer-subscribe-button {
@@ -502,9 +508,10 @@ img {
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.footer-subscribe-btn:hover,
-.footer-subscribe-btn:focus {
-  background-color: #404bbf;
+/* FIX: Виправлено селектор з .footer-subscribe-btn на .footer-subscribe-button */
+.footer-subscribe-button:hover,
+.footer-subscribe-button:focus {
+  background-color: #31d0aa;
 }
 
 .footer-subscribe-icon {
@@ -526,7 +533,6 @@ img {
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 .backdrop.is-open {
   opacity: 1;
@@ -564,8 +570,9 @@ img {
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0;
   cursor: pointer;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Оптимізовано transition */
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal-close-btn:hover,
@@ -575,7 +582,7 @@ img {
 }
 
 .modal-close-icon {
-  fill: #2e2f42;
+  fill: #2e2f42; /* Початковий колір хрестика */
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -584,7 +591,6 @@ img {
   fill: #ffffff;
 }
 
-/* Modal Form Styles */
 .modal-title {
   font-weight: 500;
   font-size: 16px;
@@ -595,12 +601,17 @@ img {
   margin-bottom: 16px;
 }
 
-.modal-field {
+/* FIX: Виправлено синтаксис та синхронізовано класи відступів */
+.modal-field-wrap {
   margin-bottom: 8px;
 }
 
-.modal-field-comment {
+.modal-field-wrap-comment {
   margin-bottom: 16px;
+}
+
+.modal-field-checkbox {
+  margin-bottom: 24px;
 }
 
 .modal-label {
@@ -664,19 +675,8 @@ img {
   border-color: #4d5ae5;
 }
 
-/* Custom Checkbox */
-.modal-checkbox-field {
-  margin-bottom: 24px;
-}
-
-.modal-checkbox-label {
-  font-size: 12px;
-  line-height: 1.17;
-  letter-spacing: 0.04em;
-  color: #8e8f99;
-}
-
-.modal-own-checkbox {
+/* --- CUSTOM CHECKBOX --- */
+.custom-checkbox {
   width: 16px;
   height: 16px;
   border: 1px solid rgba(46, 47, 66, 0.4);
@@ -685,13 +685,22 @@ img {
   align-items: center;
   justify-content: center;
   fill: transparent;
-  margin-right: 8px;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 8px; /* FIX: Додано відступ 8px від тексту */
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              border 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-checkbox:checked + .modal-checkbox-label .modal-own-checkbox {
+.modal-label-checkbox {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: #8e8f99;
+  display: flex; /* Для вирівнювання іконки та тексту */
+  align-items: center;
+}
+
+.modal-checkbox:checked + .modal-label-checkbox > .custom-checkbox {
   background-color: #404bbf;
   border: none;
   fill: #f4f4fd;
